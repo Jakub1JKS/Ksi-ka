@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KosmiczneKsięgi — Sklep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <header class="nav">
+    <div class="nav__logo">KosmiczneKsięgi</div>
+    <nav class="nav__links">
+      <a href="#" data-view="shop">Kolekcja</a>
+      <a href="#o-nas">O nas</a>
+      <a href="#" data-view="reviews">Opinie</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="nav__account" id="navAccount">
+      <!-- wypełniane przez script.js -->
+    </div>
+  </header>
+
+  <!-- ===== WIDOK: SKLEP ===== -->
+  <div id="view-shop">
+
+    <section class="hero">
+      <p class="hero__eyebrow">wydanie pierwsze</p>
+      <h1 class="hero__title">Rzeczy warte<br>poczekania do zmroku.</h1>
+      <p class="hero__subtitle">
+        Historia, którą najlepiej czyta się po zmroku, przy jednym
+        włączonym świetle.
+      </p>
+      <a href="#kolekcja" class="btn">Kup teraz</a>
+    </section>
+
+    <section class="collection" id="kolekcja">
+      <div class="collection__header">
+        <h2>Dostępne tytuły</h2>
+        <p>1 produkt</p>
+      </div>
+
+      <div class="grid grid--single">
+
+        <article class="card card--featured">
+          <div class="card__image card__image--1">
+            <img src="images/okladka.jpg" alt="Okładka książki X" class="card__image-photo" />
+          </div>
+          <div class="card__body">
+            <p class="card__eyebrow">Książka</p>
+            <h3 class="card__title">X</h3>
+            <p class="card__description">
+              Krótki opis książki pojawi się tutaj — kilka zdań o tym,
+              o czym jest historia i dlaczego warto ją przeczytać.
+            </p>
+
+            <div class="card__price-row">
+              <span class="card__price-old">72.99 zł</span>
+              <span class="card__badge">-50%</span>
+              <span class="card__price-new">35.99 zł</span>
+            </div>
+
+            <p class="card__stars-note">🍫 Kupując tę książkę zdobędziesz <strong>45 gwiazdek</strong></p>
+
+            <button class="btn btn--card" id="buyBtn">Kup teraz</button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== WIDOK: OPINIE ===== -->
+  <section class="reviews" id="view-reviews" style="display:none;">
+    <div class="reviews__header">
+      <h2>Opinie klientów</h2>
+      <div class="reviews__summary" id="reviewsSummary"></div>
+    </div>
+
+    <form class="review-form" id="reviewForm">
+      <h3>Zostaw swoją opinię</h3>
+      <input type="text" id="reviewName" placeholder="Twoje imię" required />
+      <div class="star-picker" id="starPicker" data-rating="0">
+        <span data-value="1">★</span>
+        <span data-value="2">★</span>
+        <span data-value="3">★</span>
+        <span data-value="4">★</span>
+        <span data-value="5">★</span>
+      </div>
+      <textarea id="reviewText" placeholder="Podziel się swoją opinią o książce..." required></textarea>
+      <button type="submit" class="btn">Dodaj opinię</button>
+      <p class="modal__error" id="reviewError"></p>
+    </form>
+
+    <div class="review-list" id="reviewList"></div>
+  </section>
+
+  <footer class="footer" id="kontakt">
+    <p>KosmiczneKsięgi — wydawnictwo pod gołym niebem.</p>
+    <p class="footer__muted">kontakt@kosmiczneksiegi.pl</p>
+  </footer>
+
+  <!-- ===== MODAL: LOGOWANIE / REJESTRACJA ===== -->
+  <div class="modal-overlay" id="authOverlay">
+    <div class="modal">
+      <button class="modal__close" id="authClose">✕</button>
+      <div class="modal__tabs">
+        <button class="modal__tab is-active" data-form="login" type="button">Zaloguj się</button>
+        <button class="modal__tab" data-form="register" type="button">Zarejestruj się</button>
+      </div>
+
+      <form id="loginForm" class="modal__form">
+        <input type="email" id="loginEmail" placeholder="E-mail" required />
+        <input type="password" id="loginPassword" placeholder="Hasło" required />
+        <button type="submit" class="btn">Zaloguj się</button>
+        <p class="modal__error" id="loginError"></p>
+      </form>
+
+      <form id="registerForm" class="modal__form" style="display:none;">
+        <input type="text" id="registerName" placeholder="Imię" required />
+        <input type="email" id="registerEmail" placeholder="E-mail" required />
+        <input type="password" id="registerPassword" placeholder="Hasło (min. 4 znaki)" required />
+        <button type="submit" class="btn">Utwórz konto</button>
+        <p class="modal__error" id="registerError"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: PODZIĘKOWANIE ZA ZAKUP ===== -->
+  <div class="modal-overlay" id="purchaseOverlay">
+    <div class="modal modal--purchase">
+      <button class="modal__close" id="purchaseClose">✕</button>
+      <p class="modal__icon">✦</p>
+      <h3>Dziękujemy za zakup!</h3>
+      <p id="purchaseMessage">
+        Otrzymujesz <strong>45 gwiazdek</strong> na swoje konto. Będzie nam bardzo
+        miło, jeśli zostawisz opinię o książce.
+      </p>
+      <div class="modal__actions">
+        <button class="btn" id="goToReviewBtn" type="button">Zostaw opinię</button>
+        <button class="btn btn--ghost" id="purchaseCloseBtn2" type="button">Zamknij</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST (krótkie powiadomienia) ===== -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
